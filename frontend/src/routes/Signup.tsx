@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
-import { loginUrl } from '../misc/baseurls'
+import { signUpUrl } from '../misc/baseurls'
 
 
 
@@ -14,6 +14,12 @@ const Signup = () => {
 
     const formData = new FormData(e.target);
     const inputObject = Object.fromEntries(formData); // convert the FormData object to a JSON object
+
+    fetch(signUpUrl, {
+      method: "POST"
+    }).then(data => {
+      console.log(data)
+    })
 
   }
   return (
