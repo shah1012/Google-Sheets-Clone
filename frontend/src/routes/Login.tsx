@@ -1,9 +1,12 @@
-import React, { FormEvent } from "react";
-import { Link } from "react-router-dom";
+import React, { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { loginUrl } from "../misc/baseurls";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [err, setErr] = useState<any[]>([]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -21,7 +24,15 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (!data.message) {
+          localStorage.setItem("User", JSON.stringify(data));
+          navigate("/home");
+        } else {
+          setErr([...data]);
+          setTimeout(() => {
+            setErr([]);
+          }, 5000);
+        }
       })
       .catch((err) => {
         console.log(err);

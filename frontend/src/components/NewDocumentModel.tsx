@@ -1,10 +1,19 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 interface Props {
   isOpened: boolean;
   closeModel: () => void;
 }
 
+import { useNavigate } from "react-router-dom";
+
 const NewDocumentModel = ({ isOpened, closeModel }: Props) => {
+  const navigate = useNavigate();
+  const [docTitle, setDocTitle] = useState<string>("");
+
+  const onModelSubmit = (e: React.MouseEvent) => {
+    navigate(`/editor/${docTitle}`);
+  };
+
   return (
     <div className={`${isOpened === false ? "hidden" : ""}`}>
       <div
@@ -16,8 +25,13 @@ const NewDocumentModel = ({ isOpened, closeModel }: Props) => {
         <input
           className="p-1.5 mt-5 mb-5 text-xl"
           placeholder="Sheet Name"
+          value={docTitle}
+          onChange={(e) => setDocTitle(e.target.value)}
         ></input>
-        <button className="outline-none border-none text-2xl bg-gray-400 w-1/2 text-center ml-auto mr-auto p-1.5 rounded-xl">
+        <button
+          onClick={onModelSubmit}
+          className="outline-none border-none text-2xl bg-gray-400 w-1/2 text-center ml-auto mr-auto p-1.5 rounded-xl"
+        >
           Create
         </button>
       </div>

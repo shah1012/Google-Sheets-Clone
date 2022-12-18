@@ -9,10 +9,12 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/login
+POST http://localhost:3000/update/1432
 Content-Type: application/json
 
 {
     "email": "d@gmail.com",
-    "password": "#planesD"
+    "updateData": {
+        "crap": "hello"
+    }
 }

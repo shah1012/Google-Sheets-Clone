@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 module.exports = (fastify, opts, next) => {
   fastify.post("/login", async (req, res) => {
-    const parsedBody = JSON.parse(req.body);
+    const parsedBody = req.body;
     const { email, password } = parsedBody;
     if (email && password) {
       const validPayload = validate(parsedBody);

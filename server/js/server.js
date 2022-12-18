@@ -9,7 +9,8 @@ fastify.get("/", (request, reply) => {
 
 fastify.register(require("../controllers/login"), { prefix: "/" });
 fastify.register(require("../controllers/signup"), { prefix: "/" });
-
+fastify.register(require("../controllers/updateDocs"), { prefix: "/" });
+fastify.register(require("../controllers/getDocs"), { prefix: "/" });
 
 // Run the server!
 fastify.listen({ port: 3000 }, (err) => {
